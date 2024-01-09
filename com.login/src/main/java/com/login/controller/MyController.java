@@ -52,7 +52,7 @@ public class MyController {
 
         if (!result.isEmpty()) {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(Map.of("statusCode", 200, "message", "User verified"));
+                    .body(Map.of("statusCode", 200, "message", "User verified", "data", result));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(Map.of("statusCode", 401, "message", "User not verified"));
