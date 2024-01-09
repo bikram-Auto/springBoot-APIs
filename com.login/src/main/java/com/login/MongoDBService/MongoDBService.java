@@ -21,11 +21,11 @@ public class MongoDBService {
 
 	@Autowired
     private MongoTemplate mongoTemplate;
-    public MongoCollection<Document> collection = mongoTemplate.getCollection(collectionName);
+//    public MongoCollection<Document> collection = mongoTemplate.getCollection(collectionName);
 
     public void create(String collectionName, Map<String, Object> document) {
         try {
-//            MongoCollection<Document> collection = mongoTemplate.getCollection(collectionName);
+            MongoCollection<Document> collection = mongoTemplate.getCollection(collectionName);
             Document dbDocument = new Document(document);
             collection.insertOne(dbDocument);
             System.out.println("Document inserted successfully");
