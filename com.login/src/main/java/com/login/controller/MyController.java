@@ -60,10 +60,22 @@ public class MyController {
     public ResponseEntity<Map<String, Object>> getUserByID(@RequestParam Integer userid) {
         @SuppressWarnings("rawtypes")
         List<Map> result = mongoDBService.findUserByID(userid);
-
-        // Assuming you want to return a JSON response with a "body" field
         Map<String, Object> responseBody = new HashMap<>();
-        return ResponseEntity.status(HttpStatus.OK).body(Map.of("body", result));
+        if (!result.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(Map.of(
+                            "Body", result,
+                            "StatusCode", 200,
+                            "Message", "Successful"
+                    ));
+        }else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of(
+                            "StatusCode", 401,
+                            "Message", "User not Available"
+                    ));
+        }
+
     }
 
 
