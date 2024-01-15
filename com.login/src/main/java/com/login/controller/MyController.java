@@ -1,26 +1,23 @@
 package com.login.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.login.MongoDBService.MongoDBService;
 
 @RestController
 @RequestMapping("/user")
 public class MyController {
-	
-	@Autowired
     private final MongoDBService mongoDBService;
-	
+
+    @Autowired
 	public MyController(MongoDBService mongoDBService) {
         this.mongoDBService = mongoDBService;
     }
@@ -52,11 +49,21 @@ public class MyController {
 
         if (!result.isEmpty()) {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(Map.of("statusCode", 200, "message", "User verified"));
+                    .body(Map.of("body", result, "statusCode", 200, "message", "User verified" ));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(Map.of("statusCode", 401, "message", "User not verified"));
         }
+    }
+
+    @GetMapping("/userByID")
+    public ResponseEntity<Map<String, Object>> getUserbyID(@RequestParam Integer userid) {
+        @SuppressWarnings("rawtypes")
+        List<Map> result = mongoDBService.findUserByID(userid);
+
+        // Assuming you want to return a JSON response with a "body" field
+        Map<String, Object> responseBody = new HashMap<>();
+        return ResponseEntity.status(HttpStatus.OK).body(Map.of("body", result));
     }
 
 //	@Autowired

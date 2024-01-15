@@ -61,8 +61,12 @@ public class MongoDBService {
             throw new RuntimeException("Error during database operation", e);
         }
     }
-    
-    
+
+    @SuppressWarnings("rawtypes")
+    public List<Map> findUserByID(Integer userId) {
+        Query q = new Query(Criteria.where("user_id").is(userId));
+        return mongoTemplate.find(q, Map.class, "users");
+    }
     
     
     
