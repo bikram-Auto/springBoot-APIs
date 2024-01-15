@@ -57,7 +57,7 @@ public class MyController {
     }
 
     @GetMapping("/userByID")
-    public ResponseEntity<Map<String, Object>> getUserbyID(@RequestParam Integer userid) {
+    public ResponseEntity<Map<String, Object>> getUserByID(@RequestParam Integer userid) {
         @SuppressWarnings("rawtypes")
         List<Map> result = mongoDBService.findUserByID(userid);
 
@@ -66,17 +66,5 @@ public class MyController {
         return ResponseEntity.status(HttpStatus.OK).body(Map.of("body", result));
     }
 
-//	@Autowired
-//	private StudentRepository studentrepository;
-//	
-//	@PostMapping("/")
-//	public ResponseEntity<?> addStudent(@RequestBody Student student){		
-//		Student save = this.studentrepository.save(student);
-//		return ResponseEntity.ok(save);
-//	}
-//	
-//	@GetMapping("/")
-//	public ResponseEntity<?> getStudent(){				
-//		return ResponseEntity.ok(this.studentrepository.findAll());
-//	}
+
 }
