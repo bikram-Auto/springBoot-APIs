@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import com.login.MongoDBService.MongoDBService;
 
 @RestController
 @RequestMapping("/user")
+@Tag(name = "UserController")
 public class MyController {
     private final MongoDBService mongoDBService;
 
@@ -32,10 +34,16 @@ public class MyController {
     public Map<String, Object> createDocument(@RequestBody Map<String, Object> document) {
         try {
             mongoDBService.create("users", document);
-            return Map.of("success", true, "message", "Document inserted successfully");
+            return Map.of(
+                    "success", true,
+                    "message", "Document inserted successfully"
+            );
         } catch (Exception e) {
             e.printStackTrace();
-            return Map.of("success", false, "message", "Error during document insertion");
+            return Map.of(
+                    "success", false,
+                    "message", "Error during document insertion"
+            );
         }
     }
     
@@ -49,10 +57,17 @@ public class MyController {
 
         if (!result.isEmpty()) {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(Map.of("body", result, "statusCode", 200, "message", "User verified" ));
+                    .body(Map.of(
+                            "body", result,
+                            "statusCode", 200,
+                            "message", "User verified"
+                    ));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("statusCode", 401, "message", "User not verified"));
+                    .body(Map.of(
+                            "statusCode", 401,
+                            "message", "User not verified"
+                    ));
         }
     }
 
@@ -77,6 +92,4 @@ public class MyController {
         }
 
     }
-
-
 }

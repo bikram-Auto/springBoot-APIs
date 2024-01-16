@@ -17,6 +17,7 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
@@ -32,10 +33,18 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-		  <groupId>com.puppycrawl.tools</groupId>
-		  <artifactId>checkstyle</artifactId>
-		  <version>10.12.5</version>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.3.0</version>
 		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version> <!-- Use the version that matches your needs -->
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
