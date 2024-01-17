@@ -1,4 +1,4 @@
-package com.login.MongoDBService;
+package com.login.config.mongoDBService;
 
 import java.util.ArrayList;
 import java.util.List;
